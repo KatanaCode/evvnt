@@ -6,18 +6,6 @@ module Evvnt::Api
   extend ActiveSupport::Concern
 
   ##
-  # Basic encoded API key and secret
-  BASIC_ENCODED = Base64.encode64("#{Evvnt.config.api_key}:#{Evvnt.config.api_secret}")
-
-  ##
-  # Headers to be sent with every request.
-  HEADERS = {
-    "Authorization" => "Basic #{BASIC_ENCODED}",
-    "Content-Type"  => "application/json",
-    "Accept"        => "application/json"
-  }
-
-  ##
   # Allowed HTTP verbs
   HTTP_VERBS = %i[get post put]
 
@@ -39,7 +27,7 @@ module Evvnt::Api
         if verb.in?(HTTP_VERBS)
           path = sanitize_path(path)
           log_request(verb, path, params)
-          response = public_send(verb, path, query: params, headers: HEADERS)
+          response = public_send(verb, path, query: params, headers: headers)
           log_response(response)
           parse_response(response, options)
         else
@@ -97,5 +85,24 @@ module Evvnt::Api
         path = path + ".json" unless path.ends_with?(".json")
         path
       end
+
+      ##
+      # Headers to be sent with every request.
+      #
+      # Returns Hash
+      def headers
+        {
+          "Authorization" => "Basic #{basic_auth}",
+          "Content-Type"  => "application/json",
+          "Accept"        => "application/json"
+        }
+      end
+
+      ##
+      # Key and secret as Base64 string.
+      def basic_auth
+        Base64.encode64("#{Evvnt.config.api_key}:#{Evvnt.config.api_secret}")
+      end
+
   end
 end
