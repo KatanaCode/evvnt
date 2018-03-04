@@ -92,7 +92,7 @@ module Evvnt::Api
       # Returns Hash
       def headers
         {
-          "Authorization" => "Basic #{basic_auth}",
+          "Authorization" => "Basic #{auth}",
           "Content-Type"  => "application/json",
           "Accept"        => "application/json"
         }
@@ -100,7 +100,7 @@ module Evvnt::Api
 
       ##
       # Key and secret as Base64 string.
-      def basic_auth
+      def auth
         Base64.encode64("#{Evvnt.config.api_key}:#{Evvnt.config.api_secret}")
       end
 
