@@ -10,6 +10,7 @@ require 'httparty'
 require "evvnt/version"
 require "evvnt/configuration"
 
+# Master module for Evvnt functionality.
 module Evvnt
   # frozen_string_literal: true
 

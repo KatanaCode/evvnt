@@ -31,6 +31,9 @@ Style/FrozenStringLiteralComment:
 Style/EmptyMethod:
   Enabled: false
 
+Style/MethodMissing:
+  Enabled: false
+
 # Rails:
 #   Enabled: true
 

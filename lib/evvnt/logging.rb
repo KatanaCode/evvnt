@@ -1,13 +1,14 @@
-# Internal: Log messages for debugging
-#
-module Evvnt::Logging
-  extend ActiveSupport::Concern
+module Evvnt
+  # Internal: Log messages for debugging
+  #
+  module Logging
+    extend ActiveSupport::Concern
 
-  ##
-  # The tag to print to the logger.
-  TAG_NAME = 'EVVNT'.freeze
+    ##
+    # The tag to print to the logger.
+    TAG_NAME = 'EVVNT'.freeze
 
-  private
+    private
 
     # The Logger object to print out messages to.
     def logger
@@ -33,6 +34,9 @@ module Evvnt::Logging
       end
     end
 
+    # rubocop:disable Naming/ConstantName
     # Make these methods available to the class when module is included.
     ClassMethods = self
+    # rubocop:enable Naming/ConstantName
+  end
 end
