@@ -6,12 +6,14 @@ RSpec.configure do |config|
     config.include StubApiRequestHelper
 
     Evvnt.configure do |config|
+      log_path = File.join(File.dirname(__FILE__), "..", "..", "log", "test.log")
+      FileUtils.touch(log_path) unless File.exist?(log_path)
+
+      config.logger     = Logger.new(log_path)
+
       config.api_key    = "katana"
       config.api_secret = "secret"
-      unless File.exist?("./log/test.log")
-        log_path = FileUtils.touch("./log/test.log")
-      end
-      config.logger     = Logger.new(log_path)
+
       config.debug      = true
     end
   end
