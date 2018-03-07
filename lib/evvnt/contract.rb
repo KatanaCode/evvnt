@@ -8,7 +8,7 @@ class Evvnt::Contract < Evvnt::Base
   singular_resource!
 
   ##
-  # GET /contract	Get contract information
+  # GET /contract Get contract information
   define_action :index do
     api_request(:get, resource_path, options: { object: OBJECT_KEY })
   end

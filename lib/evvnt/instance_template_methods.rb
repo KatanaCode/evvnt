@@ -3,7 +3,6 @@
 # These are defined on Evvnt::Base subclasses where required to map the Evvnt API
 # actions.
 module Evvnt::InstanceTemplateMethods
-
   # Template method for updating a given record
   #
   # record_id - An Integer or String representing the record ID on the API.

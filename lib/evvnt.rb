@@ -32,5 +32,4 @@ module Evvnt
   require "evvnt/publisher"
   require "evvnt/report"
   require "evvnt/user"
-
 end

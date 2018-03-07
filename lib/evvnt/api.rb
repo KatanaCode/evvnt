@@ -1,6 +1,5 @@
 # Internal: Handles requests to the EVVNT api and catches their responses.
 module Evvnt::Api
-
   # frozen_string_literal: true
 
   extend ActiveSupport::Concern
@@ -11,7 +10,6 @@ module Evvnt::Api
 
 
   module ClassMethods
-
     private
 
       # Make a request of the EVVNT API.
@@ -104,6 +102,5 @@ module Evvnt::Api
         Base64.encode64([Evvnt.configuration.api_key,
                          Evvnt.configuration.api_secret].join(":"))
       end
-
   end
 end

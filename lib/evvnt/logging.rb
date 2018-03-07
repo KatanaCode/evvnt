@@ -1,7 +1,6 @@
 # Internal: Log messages for debugging
 #
 module Evvnt::Logging
-
   extend ActiveSupport::Concern
 
   ##

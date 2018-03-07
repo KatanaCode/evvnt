@@ -1,6 +1,5 @@
 # Internal: Helper methods defining API paths for the defined resources
 module Evvnt::PathHelpers
-
   # Is this class defined as a singular resource?
   #
   # Returns Boolean
@@ -103,7 +102,6 @@ module Evvnt::PathHelpers
     if params_include_parent_resource_id?(params)
       path = nest_path_within_parent(path, params)
     end
-    return path
+    path
   end
-
 end

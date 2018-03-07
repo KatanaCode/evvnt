@@ -14,7 +14,7 @@ class Evvnt::Event < Evvnt::Base
   define_action :create
 
   ##
-  # PUT /events/:event_id	Update an event
+  # PUT /events/:event_id  Update an event
   define_action :update
 
   ##
@@ -22,7 +22,7 @@ class Evvnt::Event < Evvnt::Base
   define_action :ours
 
   ##
-  # GET /events/mine	List my events
+  # GET /events/mine  List my events
   define_action :mine
 
 end

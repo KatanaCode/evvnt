@@ -2,7 +2,6 @@
 #
 
 module Evvnt::Actions
-
   private
 
     ##
@@ -58,5 +57,4 @@ module Evvnt::Actions
       body = block_given? ? block : Evvnt::InstanceTemplateMethods.instance_method(action)
       define_method(action, body)
     end
-
 end
