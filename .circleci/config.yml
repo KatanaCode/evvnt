@@ -37,10 +37,6 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - run:
-          name: Code Style Check
-          command: rubocop lib --display-style-guide -c .rubocop.yml
-
-      - run:
           name: Bunder Audit
           command: gem install bundle-audit && bundle-audit check --update
 
@@ -56,6 +52,10 @@ jobs:
                             --out /tmp/test-results/rspec.xml \
                             --format progress \
                             $TEST_FILES
+
+      - run:
+          name: Code Style Check
+          command: rubocop lib --display-style-guide -c ./.rubocop.yml
 
       # collect reports
       - store_test_results:
