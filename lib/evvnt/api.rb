@@ -42,7 +42,7 @@ module Evvnt::Api
       # params - The request params being sent to the server
       #
       def log_request(verb, path, **params)
-        return unless Evvnt.config.debug
+        return unless Evvnt.configuration.debug
         debug <<~TEXT
           Headers: #{HEADERS}")
           Request: #{verb.to_s.upcase} #{base_uri}#{path} #{params}
@@ -54,7 +54,7 @@ module Evvnt::Api
       # response - The Response object from the API
       #
       def log_response(response)
-        return unless Evvnt.config.debug
+        return unless Evvnt.configuration.debug
         debug <<~TEXT
           Response: #{response}
           Status: #{response.code}
@@ -101,7 +101,8 @@ module Evvnt::Api
       ##
       # Key and secret as Base64 string.
       def auth
-        Base64.encode64("#{Evvnt.config.api_key}:#{Evvnt.config.api_secret}")
+        Base64.encode64([Evvnt.configuration.api_key,
+                         Evvnt.configuration.api_secret].join(":"))
       end
 
   end

@@ -13,13 +13,13 @@ describe Evvnt do
       end
 
       it "accepts value :live" do
-        new_subject = Evvnt.configure({})
+        new_subject = Evvnt.configure
         new_subject.environment = :live
         expect(new_subject.environment).to eql(:live)
       end
 
       it "raises an exception with any other value" do
-        new_subject = Evvnt.configure({})
+        new_subject = Evvnt.configure
         expect { new_subject.environment = :foobar }.to raise_error(ArgumentError)
       end
 

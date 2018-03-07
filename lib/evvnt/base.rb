@@ -18,7 +18,7 @@ class Evvnt::Base
   extend Evvnt::NestedResources
   extend Evvnt::Actions
 
-  if Evvnt.config.environment == :live
+  if Evvnt.configuration.environment == :live
     base_uri "https://api.evvnt.com"
   else
     base_uri "https://api.sandbox.evvnt.com"

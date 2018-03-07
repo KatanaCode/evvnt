@@ -12,7 +12,7 @@ module Evvnt::Logging
 
     # The Logger object to print out messages to.
     def logger
-      Evvnt.config.logger
+      Evvnt.configuration.logger
     end
 
     # Print a debug level message
