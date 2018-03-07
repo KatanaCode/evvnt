@@ -42,7 +42,7 @@ module Evvnt
         def log_request(verb, path, **params)
           return unless Evvnt.configuration.debug
           debug <<~TEXT
-            Headers: #{HEADERS}")
+            Headers: #{headers}")
             Request: #{verb.to_s.upcase} #{base_uri}#{path} #{params}
           TEXT
         end
