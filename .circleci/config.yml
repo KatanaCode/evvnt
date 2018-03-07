@@ -38,7 +38,7 @@ jobs:
 
       - run:
           name: Code Style Check
-          command: rubocop
+          command: rubocop lib --display-style-guide -c .rubocop.yml
 
       - run:
           name: Bunder Audit
