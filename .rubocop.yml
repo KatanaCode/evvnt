@@ -35,8 +35,8 @@ Style/FrozenStringLiteralComment:
 Style/EmptyMethod:
   Enabled: false
 
-Rails:
-  Enabled: true
+# Rails:
+#   Enabled: true
 
 Metrics/LineLength:
   Max: 90
