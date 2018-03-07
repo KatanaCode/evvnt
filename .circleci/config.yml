@@ -37,8 +37,8 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - run:
-          name: Static Code Analysis
-          command: bundle exec brakeman
+          name: Code Style Check
+          command: rubocop
 
       - run:
           name: Bunder Audit
