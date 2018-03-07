@@ -1,4 +1,6 @@
 module StubApiRequestHelper
+  class MissingFixtureError < StandardError
+  end
 
   REQUEST_HEADERS = {
     'Accept'        =>'application/json',
@@ -8,11 +10,17 @@ module StubApiRequestHelper
 
   def stub_api_request(verb, path, options = {})
     file_name = options.delete(:fixture) || "#{verb}-#{path}"
-    body_file = File.read(File.join("spec", "fixtures", "responses", "#{file_name}.json"))
+    file_path = File.join("spec", "fixtures", "responses", "#{file_name}.json")
+    unless File.exist?(file_path)
+      raise MissingFixtureError,
+            "#{file_name} not found. Did you forget to create #{file_path}"
+    end
+    body_file = File.read(file_path)
     body_json = JSON.parse(body_file)
-    stub_request(:get, "https://api.sandbox.evvnt.com/#{path}.json").
-      with(headers: REQUEST_HEADERS).
-      to_return(status: 200, body: body_file, headers: {})
+    code      = verb == :post ? 201 : 200
+    stub_request(verb, "https://api.sandbox.evvnt.com/#{path}.json").
+      with(headers: REQUEST_HEADERS, query: options[:params]).
+      to_return(status: code, body: body_file, headers: {})
   end
 
 end

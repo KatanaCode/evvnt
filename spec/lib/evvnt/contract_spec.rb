@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Evvnt::Contract, type: :api do
 
-  describe "#index" do
+  describe "::index" do
 
     before do
       stub_api_request(:get, "contract")
