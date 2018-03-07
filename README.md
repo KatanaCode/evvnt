@@ -1,5 +1,7 @@
 # Evvnt
 
+[![CircleCI](https://circleci.com/gh/KatanaCode/evvnt.svg?style=svg)](https://circleci.com/gh/KatanaCode/evvnt)
+
 ** DO NOT USE **
 
 This gem is still in development and should not be used in your application yet!
