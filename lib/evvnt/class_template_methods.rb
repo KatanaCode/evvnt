@@ -16,7 +16,12 @@ module Evvnt
     #
     # Returns {Evvnt::Base} subclass
     def create(**params)
-      api_request(:post, resource_path, params: params)
+      if params_include_parent_resource_id?(params)
+        path = nest_path_within_parent(plural_resource_path, params)
+      else
+        path = plural_resource_path
+      end
+      api_request(:post, path, params: params)
     end
 
     # Template method for fetching an index of record from the API.
@@ -26,14 +31,17 @@ module Evvnt
     # Returns Array
     def index(**params)
       params.stringify_keys!
-      if resource_path.respond_to?(:call)
-        path = resource_path.call
+      if plural_resource_path.respond_to?(:call)
+        path = plural_resource_path.call
         path.match(PARAM_REGEX) do |segment|
           value = params.delete(segment.to_s[1..-1])
           path  = path.gsub!(/#{segment}/, value.to_s)
         end
       else
-        path = resource_path
+        path = plural_resource_path
+      end
+      if params_include_parent_resource_id?(params)
+        path = nest_path_within_parent(path, params)
       end
       api_request(:get, path, params: params)
     end
@@ -75,7 +83,7 @@ module Evvnt
     # Returns {Evvnt::Base}
     def ours(record_id = nil, **params)
       id_segment = record_id.to_s
-      segments   = [resource_path, "ours", id_segment].select(&:present?)
+      segments   = [plural_resource_path, "ours", id_segment].select(&:present?)
       path       = File.join(*segments).to_s
       api_request(:get, path, params: params)
     end
@@ -86,7 +94,7 @@ module Evvnt
     #
     # Returns Array
     def mine(**params)
-      path = File.join(resource_path, "mine").to_s
+      path = File.join(plural_resource_path, "mine").to_s
       api_request(:get, path, params: params)
     end
   end

@@ -36,11 +36,11 @@ module Evvnt
 
         # Log the request being sent to the API
         #
-        # verb   - The HTTP verb for the request
-        # path   - The path of the request
-        # params - The request params being sent to the server
+        # verb   - A Symbol of the HTTP verb for the request
+        # path   - A String of the path of the request
+        # params - A Hash of the request params being sent to the server
         #
-        def log_request(verb, path, **params)
+        def log_request(verb, path, params = {})
           return unless Evvnt.configuration.debug
           debug <<~TEXT
             Headers: #{headers}")

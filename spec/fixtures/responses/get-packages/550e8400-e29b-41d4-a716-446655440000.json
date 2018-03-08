@@ -1,0 +1,9 @@
+{
+  "uuid": "550e8400-e29b-41d4-a716-446655440000",
+  "type": "SinglePackage",
+  "broadcast_volume": 60,
+  "event_quantity": 5,
+  "purchase_order_id": "PO235",
+  "notes": "",
+  "purchase_date": "2014-01-01"
+}

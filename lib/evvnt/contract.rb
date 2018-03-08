@@ -11,7 +11,7 @@ module Evvnt
     ##
     # GET /contract Get contract information
     define_action :index do
-      api_request(:get, resource_path, options: { object: OBJECT_KEY })
+      api_request(:get, plural_resource_path, options: { object: OBJECT_KEY })
     end
 
   end

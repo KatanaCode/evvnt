@@ -42,9 +42,10 @@ module Evvnt
     #
     # Returns String
     def nest_path_within_parent(path, params)
+      params.symbolize_keys!
       parent_resource = parent_resource_name(params)
       parent_id       = params.delete(parent_resource_param(params)).try(:to_s)
-      File.join(parent_resource, parent_id, path).to_s
+      File.join(*[parent_resource, parent_id, path].compact).to_s
     end
 
     # The API path for a single resource on the API
@@ -67,16 +68,16 @@ module Evvnt
 
     # The defined path of this resource on the API (e.g. "/users")
     #
-    # new_path - A String with the new default value for the resource_path
+    # new_path - A String with the new default value for the plural_resource_path
     # block    - A Proc object for defining dynamic resource_paths
     #
     # Returns String
     # Returns Proc
-    def resource_path(new_path = nil, &block)
+    def plural_resource_path(new_path = nil, &block)
       if new_path || block_given?
-        @resource_path = (new_path || block)
+        @plural_resource_path = (new_path || block)
       else
-        @resource_path || default_resource_path
+        @plural_resource_path || default_resource_path
       end
     end
 

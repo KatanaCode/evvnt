@@ -19,6 +19,10 @@ module Evvnt
     extend Evvnt::NestedResources
     extend Evvnt::Actions
 
+    ##
+    # Test if a String is a date string.
+    DATE_STRING_REGEX = %r{^\d{4}-\d{2}-\d{2}$}
+
     if Evvnt.configuration.environment == :live
       base_uri "https://api.evvnt.com"
     else
@@ -62,7 +66,7 @@ module Evvnt
     # attributes - A Hash of attributes for the given record. See {method_missing} for
     #              more info on how this is handled.
     def initialize(attributes = {})
-      self.attributes = attributes
+      self.attributes = Hash[attributes.map { |k,v| [k, format_attribute(v)] }]
     end
 
     # Has this record been saved on the EVVNT API?
@@ -105,6 +109,23 @@ module Evvnt
 
     private
 
+    def format_attribute(value)
+      case value
+      when String
+        format_string_attribute(value)
+      else
+        value
+      end
+    end
+
+    def format_string_attribute(value)
+      case value
+      when DATE_STRING_REGEX
+        value.to_date
+      else
+        value
+      end
+    end
     ##
     # Overrides method missing to catch undefined methods. If +method_name+ is one
     # of the keys on +attributes+, returns the value of that attribute. If +method_name+
