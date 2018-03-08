@@ -45,7 +45,9 @@ module Evvnt
     #
     # Returns {Evvnt::Base} subclass
     def show(record_id = nil, **params)
-      raise ArgumentError, "record_id cannot be nil" unless singular_resource?
+      if record_id.nil? && !singular_resource?
+        raise ArgumentError, "record_id cannot be nil"
+      end
       path = singular_path_for_record(record_id, params)
       api_request(:get, path, params: params)
     end
@@ -57,9 +59,11 @@ module Evvnt
     #
     # Returns {Evvnt::Base} subclass
     def update(record_id, **params)
-      raise ArgumentError, "record_id cannot be nil" unless singular_resource?
+      if record_id.nil? && !singular_resource?
+        raise ArgumentError, "record_id cannot be nil"
+      end
       path = singular_path_for_record(record_id, params)
-      api_request(:patch, path, params: params)
+      api_request(:put, path, params: params)
     end
 
     # Template method for fetching _mine_ records from the API.
