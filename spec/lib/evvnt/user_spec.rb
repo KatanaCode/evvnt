@@ -31,9 +31,7 @@ describe Evvnt::User, type: :api do
 
   describe "::create" do
 
-    let!(:attributes) {
-      { first_name: "Gavin", last_name: "Morrice", email: "me@example.com" }
-    }
+    let!(:attributes) { { name: "Gavin Morrice", email: "me@example.com" } }
 
     before do
       stub_api_request(:post, "users", params: attributes)
