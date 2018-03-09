@@ -43,26 +43,26 @@ module Evvnt
 
     def format_array_attribute(key, value)
       case key
-      when %r{^(image\_urls|sub\_category\_ids)$}
+      when /^(image\_urls|sub\_category\_ids)$/
         send(:"format_#{key}_attribute", key, value)
       else
         super
       end
     end
 
-    def format_image_urls_attribute(key, value)
+    def format_image_urls_attribute(_key, value)
       value
     end
 
-    def format_sub_category_ids_attribute(key, value)
+    def format_sub_category_ids_attribute(_key, value)
       value
     end
 
-    def format_links_attribute(key, value)
+    def format_links_attribute(_key, value)
       value.to_a.map { |name, url| Evvnt::Link.new(name: name, url: url) }
     end
 
-    def format_prices_attribute(key, value)
+    def format_prices_attribute(_key, value)
       value.to_a.map { |name, price| Evvnt::Price.new(name: name, value: price) }
     end
   end

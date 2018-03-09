@@ -4,28 +4,30 @@ module Evvnt
   class Base
     # frozen_string_literal: true
 
-    require "evvnt/logging"
-    require "evvnt/api"
-    require "evvnt/path_helpers"
-    require "evvnt/nested_resources"
     require "evvnt/actions"
+    require "evvnt/api"
     require "evvnt/class_template_methods"
     require "evvnt/instance_template_methods"
+    require "evvnt/logging"
+    require "evvnt/nested_resources"
+    require "evvnt/path_helpers"
+    require "evvnt/persistence"
 
     include HTTParty
-    include Evvnt::Logging
-    include Evvnt::Api
-    extend Evvnt::PathHelpers
-    extend Evvnt::NestedResources
-    extend Evvnt::Actions
+    include Logging
+    include Api
+    include Persistence
+    extend PathHelpers
+    extend NestedResources
+    extend Actions
 
     ##
     # Test if a String is a date string.
-    DATE_STRING_REGEX = %r{^\d{4}-\d{2}-\d{2}$}
+    DATE_STRING_REGEX = /^\d{4}-\d{2}-\d{2}$/
 
     ##
     # Test if a String is a datetime string.
-    DATETIME_STRING_REGEX = %r{^\d{4}-\d\d-\d\dT\d\d\:\d\d\:\d\d\+\d\d\:\d\d$}
+    DATETIME_STRING_REGEX = /^\d{4}-\d\d-\d\dT\d\d\:\d\d\:\d\d\+\d\d\:\d\d$/
 
 
     if Evvnt.configuration.environment == :live
@@ -71,28 +73,7 @@ module Evvnt
     # attributes - A Hash of attributes for the given record. See {method_missing} for
     #              more info on how this is handled.
     def initialize(attributes = {})
-      self.attributes = Hash[attributes.map { |k,v| [k, format_attribute(k, v)] }]
-    end
-
-    # Has this record been saved on the EVVNT API?
-    #
-    # Returns a Boolean
-    def persisted?
-      unique_identifier.present?
-    end
-
-    # Is this record an unsaved/fresh record?
-    #
-    # Returns a Boolean
-    def new_record?
-      unique_identifier.blank?
-    end
-
-    # Save this record to the EVVNT API
-    #
-    # Returns {Evvnt::Base} subclass
-    def save
-      new_record? ? save_as_new_record : save_as_persisted_record
+      self.attributes = Hash[attributes.map { |k, v| [k, format_attribute(k, v)] }]
     end
 
     ##
@@ -128,20 +109,18 @@ module Evvnt
     end
 
     def format_hash_attribute(key, value)
-      if Evvnt.const_defined?(key.singularize.classify)
-        Evvnt.const_get(key.singularize.classify).new(value)
-      else
+      unless Evvnt.const_defined?(key.singularize.classify)
         raise ArgumentError, "Unknown object type: #{key}"
       end
+      Evvnt.const_get(key.singularize.classify).new(value)
     end
 
     def format_array_attribute(key, value)
       Array(value).map do |attributes|
-        if Evvnt.const_defined?(key.singularize.classify)
-          Evvnt.const_get(key.singularize.classify).new(attributes)
-        else
+        unless Evvnt.const_defined?(key.singularize.classify)
           raise ArgumentError, "Unknown object type: #{key}"
         end
+        Evvnt.const_get(key.singularize.classify).new(attributes)
       end
     end
 
@@ -155,6 +134,7 @@ module Evvnt
         value
       end
     end
+
     ##
     # Overrides method missing to catch undefined methods. If +method_name+ is one
     # of the keys on +attributes+, returns the value of that attribute. If +method_name+
@@ -181,20 +161,6 @@ module Evvnt
     # Returns Boolean
     def respond_to_missing?(method, *)
       attributes.stringify_keys.keys.include?(method.to_s) || super
-    end
-
-    # Save this record to the EVVNT API as a new record using the +create+ action.
-    #
-    def save_as_new_record
-      new_attributes = attributes.reject { |k, _v| k.to_s =~ /^(id|uuid)$/ }
-      self.class.create(new_attributes)
-    end
-
-    # Save this record to the EVVNT API as an existing record using the +update+ action.
-    #
-    def save_as_persisted_record
-      new_attributes = attributes.reject { |k, _v| k.to_s =~ /^(id|uuid)$/ }
-      self.class.update(id, new_attributes)
     end
   end
 end

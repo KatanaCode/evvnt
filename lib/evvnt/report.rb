@@ -19,7 +19,7 @@ module Evvnt
 
     def format_hash_attribute(key, value)
       case key
-      when %r{^(referrers|search\_indexing)$}
+      when /^(referrers|search\_indexing)$/
         send(:"format_#{key}_attribute", key, value)
       else
         super
@@ -28,26 +28,26 @@ module Evvnt
 
     def format_array_attribute(key, value)
       case key
-      when %r{^(clicks\_by\_day|broadcasts)$}
+      when /^(clicks\_by\_day|broadcasts)$/
         send(:"format_#{key}_attribute", key, value)
       else
         super
       end
     end
 
-    def format_referrers_attribute(key, value)
+    def format_referrers_attribute(_key, value)
       value.to_a.map { |url, count| Evvnt::Referrer.new(url: url, count: count) }
     end
 
-    def format_search_indexing_attribute(key, value)
+    def format_search_indexing_attribute(_key, value)
       value.to_a.map { |name, url| Evvnt::SearchIndexing.new(name: name, url: url) }
     end
 
-    def format_broadcasts_attribute(key, value)
+    def format_broadcasts_attribute(_key, value)
       Array(value).map { |atts| Evvnt::Broadcast.new(atts) }
     end
 
-    def format_clicks_by_day_attribute(key, value)
+    def format_clicks_by_day_attribute(_key, value)
       value.to_a[1..-1].map do |date, twitter, myspace, total|
         Evvnt::ClicksByDay.new(date: date, twitter: twitter,
                                myspace: myspace, total: total)

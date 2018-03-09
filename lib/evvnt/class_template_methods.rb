@@ -16,11 +16,11 @@ module Evvnt
     #
     # Returns {Evvnt::Base} subclass
     def create(**params)
-      if params_include_parent_resource_id?(params)
-        path = nest_path_within_parent(plural_resource_path, params)
-      else
-        path = plural_resource_path
-      end
+      path = if params_include_parent_resource_id?(params)
+               nest_path_within_parent(plural_resource_path, params)
+             else
+               plural_resource_path
+             end
       api_request(:post, path, params: params)
     end
 
