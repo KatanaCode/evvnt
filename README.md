@@ -79,7 +79,9 @@ For example:
 @user.save
 ```
 
-For a full list of the Evvnt _model_ classes and their endpoints, please check out the documentation in the models:
+## Documentation
+
+For a full list of the Evvnt _model_ classes and their endpoints, please check out the documentation in the models, or in the [auto-generated docs](http://www.rubydoc.info/gems/evvnt/)
 
  - [Category](lib/evvnt/category.rb)
    - index (GET /categories List categories)
