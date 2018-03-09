@@ -25,7 +25,11 @@ module Evvnt
   end
 
   require "evvnt/base"
+  require "evvnt/audience_reach"
+  require "evvnt/broadcast"
+  require "evvnt/broadcast_result"
   require "evvnt/category"
+  require "evvnt/clicks_by_day"
   require "evvnt/contact"
   require "evvnt/contract"
   require "evvnt/event"
@@ -34,7 +38,9 @@ module Evvnt
   require "evvnt/price"
   require "evvnt/published_event"
   require "evvnt/publisher"
+  require "evvnt/referrer"
   require "evvnt/report"
+  require "evvnt/search_indexing"
   require "evvnt/user"
   require "evvnt/venue"
 end

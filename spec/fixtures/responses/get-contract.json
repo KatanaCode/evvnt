@@ -1,1 +1,9 @@
-{"package_options":[{"id":131,"type":"SinglePackage","broadcast_volume":0,"currency":"GBP","cost_per_event":"0.00"},{"id":132,"type":"SinglePackage","broadcast_volume":100,"currency":"GBP","cost_per_event":"50.00"},{"id":133,"type":"SubscriptionPackage","broadcast_volume":100,"currency":"GBP","cost_per_event":"40.00"}]}
+{
+  "package_options": [{
+    "id": 50,
+    "type": "SinglePackage",
+    "broadcast_volume": 60,
+    "currency": "GBP",
+    "cost_per_event": "500.0"
+  }]
+}

@@ -41,6 +41,23 @@ module Evvnt
       end
     end
 
+    def format_array_attribute(key, value)
+      case key
+      when %r{^(image\_urls|sub\_category\_ids)$}
+        send(:"format_#{key}_attribute", key, value)
+      else
+        super
+      end
+    end
+
+    def format_image_urls_attribute(key, value)
+      value
+    end
+
+    def format_sub_category_ids_attribute(key, value)
+      value
+    end
+
     def format_links_attribute(key, value)
       value.to_a.map { |name, url| Evvnt::Link.new(name: name, url: url) }
     end

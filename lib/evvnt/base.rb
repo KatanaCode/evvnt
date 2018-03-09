@@ -118,6 +118,8 @@ module Evvnt
       case value
       when String
         format_string_attribute(value)
+      when Array
+        format_array_attribute(key, value)
       when Hash
         format_hash_attribute(key, value)
       else
@@ -126,10 +128,20 @@ module Evvnt
     end
 
     def format_hash_attribute(key, value)
-      if Evvnt.const_defined?(key.classify)
-        Evvnt.const_get(key.classify).new(value)
+      if Evvnt.const_defined?(key.singularize.classify)
+        Evvnt.const_get(key.singularize.classify).new(value)
       else
         raise ArgumentError, "Unknown object type: #{key}"
+      end
+    end
+
+    def format_array_attribute(key, value)
+      Array(value).map do |attributes|
+        if Evvnt.const_defined?(key.singularize.classify)
+          Evvnt.const_get(key.singularize.classify).new(attributes)
+        else
+          raise ArgumentError, "Unknown object type: #{key}"
+        end
       end
     end
 
