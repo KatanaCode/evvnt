@@ -1,16 +1,10 @@
-# Evvnt
+# evvnt
 
 [![CircleCI](https://circleci.com/gh/KatanaCode/evvnt.svg?style=svg)](https://circleci.com/gh/KatanaCode/evvnt)
 
-** DO NOT USE **
-
-This gem is still in development and should not be used in your application yet!
+Provides a Ruby wrapper around the evvnt APIs
 
 ---
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/evvnt`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
@@ -30,7 +24,54 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Before you begin, you'll need to obtain an API key and secret from evvnt. Once you have that in place, include these in your gem configuration.
+
+### Configuration
+
+To configure the gem, create an initializer and define the following block:
+
+``` ruby
+# config/initializers/evvnt.rb
+Evvnt.configure do |config|
+  # Print out useful logger info to the Rails log
+  config.logger     = Rails.logger
+  config.debug      = Rails.env.development?
+  # Your API key and secret
+  config.api_key    = "..."
+  config.api_secret = "secret"
+end
+
+```
+
+### In your code
+
+This gem provides an equivalent endpoint for each of the endpoints on the evvnt API. It follows a familiar, idomatic rails pattern to create, fetch, and, update records.
+
+For example:
+
+```ruby
+# => Returns all of the categories from the API as an Evvnt::Category object
+@categories = Evvnt::Category.all
+
+# The same as the above, aliased
+@categories = Evvnt::Category.index
+
+# Returns the first Category
+@category = Evvnt::Category.first
+@category.name # => "Academic / Learning"
+
+# Returns the last Category
+@category = Evvnt::Category.last
+@category.name # => "Alternative Investment"
+
+# Create a User on the API
+@user = Evvnt::User.create(name: "Sarah Connor", email: "sarah@example.com")
+
+# Grab the last User from the API and update their email address:
+@user = Evvnt::User.last
+@user.email = "newemail@example.com"
+@user.save
+```
 
 ## Development
 
