@@ -26,11 +26,15 @@ module Evvnt
 
   require "evvnt/base"
   require "evvnt/category"
+  require "evvnt/contact"
   require "evvnt/contract"
   require "evvnt/event"
+  require "evvnt/link"
   require "evvnt/package"
+  require "evvnt/price"
   require "evvnt/published_event"
   require "evvnt/publisher"
   require "evvnt/report"
   require "evvnt/user"
+  require "evvnt/venue"
 end

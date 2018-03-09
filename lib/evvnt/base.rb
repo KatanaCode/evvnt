@@ -23,6 +23,11 @@ module Evvnt
     # Test if a String is a date string.
     DATE_STRING_REGEX = %r{^\d{4}-\d{2}-\d{2}$}
 
+    ##
+    # Test if a String is a datetime string.
+    DATETIME_STRING_REGEX = %r{^\d{4}-\d\d-\d\dT\d\d\:\d\d\:\d\d\+\d\d\:\d\d$}
+
+
     if Evvnt.configuration.environment == :live
       base_uri "https://api.evvnt.com"
     else
@@ -66,7 +71,7 @@ module Evvnt
     # attributes - A Hash of attributes for the given record. See {method_missing} for
     #              more info on how this is handled.
     def initialize(attributes = {})
-      self.attributes = Hash[attributes.map { |k,v| [k, format_attribute(v)] }]
+      self.attributes = Hash[attributes.map { |k,v| [k, format_attribute(k, v)] }]
     end
 
     # Has this record been saved on the EVVNT API?
@@ -109,12 +114,22 @@ module Evvnt
 
     private
 
-    def format_attribute(value)
+    def format_attribute(key, value)
       case value
       when String
         format_string_attribute(value)
+      when Hash
+        format_hash_attribute(key, value)
       else
         value
+      end
+    end
+
+    def format_hash_attribute(key, value)
+      if Evvnt.const_defined?(key.classify)
+        Evvnt.const_get(key.classify).new(value)
+      else
+        raise ArgumentError, "Unknown object type: #{key}"
       end
     end
 
@@ -122,6 +137,8 @@ module Evvnt
       case value
       when DATE_STRING_REGEX
         value.to_date
+      when DATETIME_STRING_REGEX
+        value.to_datetime
       else
         value
       end
