@@ -82,34 +82,34 @@ For example:
 For a full list of the Evvnt _model_ classes and their endpoints, please check out the documentation in the models:
 
  - [Category](lib/evvnt/category.rb)
-   - index
+   - index (GET /categories List categories)
 - [Contract](lib/evvnt/contract.rb)
-  - index
+  - index (GET /contract Get contract information)
 - [Event](lib/evvnt/event.rb)
-  - index
-  - create
-  - show
-  - update
-  - ours
-  - mine
+  - index (GET /events List Events)
+  - create (POST /events  Create an event)
+  - show (GET /events/:event_id Get one event)
+  - update (PUT /events/:event_id  Update an event)
+  - ours (GET /events/ours(/:id) Get events of you and your created users)
+  - mine (GET /events/mine  List my events)
 - [Package](lib/evvnt/package.rb)
-  - index
-  - create
-  - show
-  - mine
+  - index (GET /users/:user_id/packages Lists all of the packages belonging to a user)
+  - create (POST /packages Create a package)
+  - show (GET /packages/:package_id Get the details of a package)
+  - mine (GET /packages/mine List my packages)
 - [PublishedEvent](lib/evvnt/published_event,rb)
-  - index
-  - show
-  - update
+  - index (GET /events List Events)
+  - show (GET /events/:event_id Get one event)
+  - update (PUT /events/:event_id Update an event)
 - [Publisher](lib/evvnt/publisher.rb)
-  - index
+  - index (GET /publishers List my publishing sites)
 - [Report](lib/evvnt/report.rb)
-  - show
+  - show (/events/:event_id/report View report data for my event)
 - [User](lib/evvnt/user.rb)
-   - create
-   - index
-   - show
-   - update
+   - create (POST /users Create a user)
+   - index (GET /users Get a list of all users created by you)
+   - show (GET /users/:user_id Get details of a user)
+   - update (PUT /users/:user_id Update a user)
 
 ## Development
 
