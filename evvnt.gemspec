@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "dotenv"
   spec.add_development_dependency "byebug"
   spec.add_development_dependency "rspec-json_matchers"
+  spec.add_development_dependency "rspec-collection_matchers"
 end

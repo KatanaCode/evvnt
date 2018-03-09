@@ -4,7 +4,7 @@ require "webmock/rspec"
 require "support/api_requests"
 require "support/stub_api_request_helper"
 require "rspec-json_matchers"
-
+require 'rspec/collection_matchers'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
