@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "A wrapper for the EVVNT API"
   spec.description   = "Provides a wrapper and helper classes for the EVVNT rest API"
-  spec.homepage      = "https://github.com/katanacode.com/evvnt"
+  spec.homepage      = "https://github.com/katanacode/evvnt"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
