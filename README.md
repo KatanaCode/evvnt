@@ -79,6 +79,38 @@ For example:
 @user.save
 ```
 
+For a full list of the Evvnt _model_ classes and their endpoints, please check out the documentation in the models:
+
+ - [Category](lib/evvnt/category.rb)
+   - index
+- [Contract](lib/evvnt/contract.rb)
+  - index
+- [Event](lib/evvnt/event.rb)
+  - index
+  - create
+  - show
+  - update
+  - ours
+  - mine
+- [Package](lib/evvnt/package.rb)
+  - index
+  - create
+  - show
+  - mine
+- [PublishedEvent](lib/evvnt/published_event,rb)
+  - index
+  - show
+  - update
+- [Publisher](lib/evvnt/publisher.rb)
+  - index
+- [Report](lib/evvnt/report.rb)
+  - show
+- [User](lib/evvnt/user.rb)
+   - create
+   - index
+   - show
+   - update
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
