@@ -1,0 +1,45 @@
+{
+  "event_id": 1234,
+  "broadcast_results": {
+    "num_sites_total": 90,
+    "num_sites_live": 30,
+    "num_sites_submitted": 60
+  },
+  "audience_reach": {
+    "uniques": 79302819,
+    "local_reach": 790108,
+    "mobile_apps": 29
+  },
+  "clicks_by_day": [
+    ["x", "Twitter", "Myspace", "Total clicks"],
+    ["1 Mar", 5, 22, 27],
+    ["2 Mar", 0, 0, 0],
+    ["3 Mar", 9, 0, 9],
+    ["4 Mar", 0, 3, 3]
+  ],
+  "referrers": {
+    "facebook.com": 3,
+    "twitter.com": 4
+  },
+  "search_indexing": {
+    "google_url": "https://www.google.co.uk/search?q=My+Event+Title",
+    "yahoo_url": "http://search.yahoo.com/search?p=My+Event+Title",
+    "bing_url": "http://www.bing.com/search?q=My+Event+Title",
+    "ask_url": "http://www.ask.com/web?q=My+Event+Title",
+    "aol_url": "http://search.aol.com/aol/search?q=My+Event+Title"
+  },
+  "broadcasts": [{
+    "url": "",
+    "category": "Targeted",
+    "publisher": {
+      "id": 133,
+      "name": "- Finance: Financial Conferences",
+      "url": "http://www.financial-conferences.com/",
+      "location_type_description": "Global",
+      "site_unique_users": 15000,
+      "local_reach": 150,
+      "mobile_app": false,
+      "blog_post_url": "http://evvnt.com/2012/10/the-guide-to-financial-conference-events-listing-site/"
+    }
+  }]
+}

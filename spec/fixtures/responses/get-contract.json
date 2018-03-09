@@ -1,0 +1,9 @@
+{
+  "package_options": [{
+    "id": 50,
+    "type": "SinglePackage",
+    "broadcast_volume": 60,
+    "currency": "GBP",
+    "cost_per_event": "500.0"
+  }]
+}

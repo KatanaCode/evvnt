@@ -1,0 +1,42 @@
+[
+  {
+    "id": 12345,
+    "title": "The Event Title",
+    "category_id": 17,
+    "timestamp": "2013-02-07T17:35:22Z",
+    "start_time": "2013-02-23T22:00:00Z",
+    "end_time": "2013-02-24T03:00:00Z",
+    "summary": "This is an example event summary\r\nIt may have up to 200 characters. Line breaks look like this.\r\n",
+    "description": "This is the complete event description. Line breaks still look like this.\r\n The full description can have up to 2000 characters.",
+    "image_urls" : ["http://example.com/the_url_of_the_image_associated_with_the_event"],
+    "organiser_name": "John Smith Event Organisers Ltd",
+    "contact" : {
+      "name": "John Smith",
+      "email": "johnsmith@example.com",
+      "tel": "020 1111 2222"
+    },
+    "venue": {
+      "name": "Venue name",
+      "address_1": "Venue Address Line 1",
+      "address_2": "Venue Address Line 2",
+      "town": "Venue town / city",
+      "country": "Venue Country",
+      "postcode": "Venue post code / zip code",
+      "latitude": 52.1234,
+      "longitude": -0.5678
+    },
+    "links" : {
+      "Website": "https://go.evvnt.com/UUnkit",
+      "Twitter": "https://go.evvnt.com/fswtgv",
+      "Booking": "https://go.evvnt.com/ergy42"
+    },
+    "prices": {
+      "price 1": "GBP 3.5",
+      "price 2": "GBP 1.0"
+    },
+    "artists" : "Richard Green, Groucho Marx",
+    "keywords" : "Example, event, keywords",
+    "hashtag" : "event2013",
+    "report_url" : "https://app.evvnt.com/reports/ZW8AFEGZFE6G9"
+  }
+]
