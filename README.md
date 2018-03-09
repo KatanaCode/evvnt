@@ -60,6 +60,12 @@ For example:
 @category = Evvnt::Category.first
 @category.name # => "Academic / Learning"
 
+# Fetch one event from the API
+@event = Evvnt::Event.find("....")
+
+# The same as above, aliased
+@event = Evvnt::Event.show("....")
+
 # Returns the last Category
 @category = Evvnt::Category.last
 @category.name # => "Alternative Investment"
