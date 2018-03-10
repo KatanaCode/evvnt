@@ -98,10 +98,12 @@ module Evvnt
     # block       - Proc of code passed with original message.
     #
     def method_missing(method_name, *args)
-      if method_name.to_s
-        attributes[method_name.to_s.gsub(/\=+/, "")] = args.first
+      setter    = method_name.to_s.ends_with?('=')
+      attr_name = method_name.to_s.gsub(/=$/, "")
+      if setter
+        attributes[attr_name] = args.first
       else
-        attributes[method_name.to_s.gsub(/\=+/, "")]
+        attributes[attr_name]
       end
     end
 
