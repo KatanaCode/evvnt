@@ -55,7 +55,7 @@ jobs:
 
       - run:
           name: "Report CC"
-          command: ./cc-test-reporter after-build --exit-code 1
+          command: ./cc-test-reporter after-build --exit-code 0
 
       - run:
           name: Bunder Audit
