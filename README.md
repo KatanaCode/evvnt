@@ -1,14 +1,12 @@
 # evvnt
 
+Provides a Ruby wrapper around the evvnt APIs
+
 [![Latest Version](https://img.shields.io/gem/v/evvnt.svg)](https://img.shields.io/gem/v/evvnt.svg)
 [![CircleCI](https://circleci.com/gh/KatanaCode/evvnt.svg?style=svg)](https://circleci.com/gh/KatanaCode/evvnt)
 [![Downloads](https://img.shields.io/github/downloads/katanacode/evvnt/total.svg)](https://img.shields.io/github/downloads/katanacode/evvnt/total.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fdd8cffc25d6002a68df/maintainability)](https://codeclimate.com/github/KatanaCode/evvnt/maintainability)
 
-
-
-
-Provides a Ruby wrapper around the evvnt APIs
 
 ---
 
