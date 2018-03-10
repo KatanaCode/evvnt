@@ -21,6 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "activesupport", ">= 3.0"
   spec.add_dependency "httparty", ">= 0.16.0"
   spec.add_dependency "oj"
+  spec.add_development_dependency "simplecov"
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec", ">= 3.7.0", "< 4.0"

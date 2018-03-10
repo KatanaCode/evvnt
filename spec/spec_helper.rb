@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require "evvnt"
 require "byebug"
 require "webmock/rspec"
