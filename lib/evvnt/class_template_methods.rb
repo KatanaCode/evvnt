@@ -16,11 +16,7 @@ module Evvnt
     #
     # Returns {Evvnt::Base} subclass
     def create(**params)
-      path = if params_include_parent_resource_id?(params)
-               nest_path_within_parent(plural_resource_path, params)
-             else
-               plural_resource_path
-             end
+      path = nest_path_within_parent(plural_resource_path, params)
       api_request(:post, path, params: params)
     end
 
@@ -31,18 +27,7 @@ module Evvnt
     # Returns Array
     def index(**params)
       params.stringify_keys!
-      if plural_resource_path.respond_to?(:call)
-        path = plural_resource_path.call
-        path.match(PARAM_REGEX) do |segment|
-          value = params.delete(segment.to_s[1..-1])
-          path  = path.gsub!(/#{segment}/, value.to_s)
-        end
-      else
-        path = plural_resource_path
-      end
-      if params_include_parent_resource_id?(params)
-        path = nest_path_within_parent(path, params)
-      end
+      path = nest_path_within_parent(plural_resource_path, params)
       api_request(:get, path, params: params)
     end
 
@@ -56,7 +41,7 @@ module Evvnt
       if record_id.nil? && !singular_resource?
         raise ArgumentError, "record_id cannot be nil"
       end
-      path = singular_path_for_record(record_id, params)
+      path = nest_path_within_parent(singular_path_for_record(record_id, params), params)
       api_request(:get, path, params: params)
     end
 
@@ -70,7 +55,7 @@ module Evvnt
       if record_id.nil? && !singular_resource?
         raise ArgumentError, "record_id cannot be nil"
       end
-      path = singular_path_for_record(record_id, params)
+      path = nest_path_within_parent(singular_path_for_record(record_id, params), params)
       api_request(:put, path, params: params)
     end
 

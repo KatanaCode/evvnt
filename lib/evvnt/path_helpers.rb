@@ -12,103 +12,81 @@ module Evvnt
       @singular_resource == true
     end
 
-    # Declare this class as a singular resource
-    #
-    def singular_resource!
-      @singular_resource = true
-      resource_name(name.split("::").last.underscore.singularize)
-    end
-
     # The name for this class's corresponding resource on the API.
-    #
-    # rename - A String representing the new resource_name.
-    #
-    def resource_name(rename = nil)
-      if rename
-        @resource_name = rename
-      else
-        @resource_name || default_resource_name
+    def resource_name
+      @resource_name || default_resource_name
+    end
+
+
+    protected
+
+      # Declare this class as a singular resource
+      #
+      def singular_resource!
+        @singular_resource = true
+        self.resource_name = name.split("::").last.underscore.singularize
       end
-    end
 
-    # Nest a given resource path within a parent resource.
-    #
-    # path   - A String representing an API resource path.
-    # params - A Hash of params to send to the API.
-    #
-    # Examples
-    #
-    #   nest_path_within_parent("bags/1", {user_id: "123"}) # => /users/123/bags/1
-    #
-    # Returns String
-    def nest_path_within_parent(path, params)
-      params.symbolize_keys!
-      parent_resource = parent_resource_name(params)
-      parent_id       = params.delete(parent_resource_param(params)).try(:to_s)
-      File.join(*[parent_resource, parent_id, path].compact).to_s
-    end
 
-    # The API path for a single resource on the API
-    #
-    # Returns String
-    def singular_resource_path
-      if singular_resource?
+      def resource_name=(value)
+        @resource_name = value
+      end
+
+    private
+
+      # The default name of this resource on the API (e.g. "users")
+      #
+      # Returns String
+      def default_resource_name
+        @default_resource_name || name.split("::").last.underscore.pluralize
+      end
+
+      # The default path of this resource on the API (e.g. "/users")
+      #
+      # Returns String
+      def default_resource_path
         resource_name
-      else
+      end
+
+      # Nest a given resource path within a parent resource.
+      #
+      # path   - A String representing an API resource path.
+      # params - A Hash of params to send to the API.
+      #
+      # Examples
+      #
+      #   nest_path_within_parent("bags/1", {user_id: "123"}) # => /users/123/bags/1
+      #
+      # Returns String
+      def nest_path_within_parent(path, params)
+        return path unless params_include_parent_resource_id?(params)
+        params.symbolize_keys!
+        parent_resource = parent_resource_name(params)
+        parent_id       = params.delete(parent_resource_param(params)).try(:to_s)
+        File.join(*[parent_resource, parent_id, path].compact).to_s
+      end
+
+      # The API path for a single resource on the API
+      #
+      # Returns String
+      def singular_resource_path
+        return resource_name if singular_resource?
         "#{resource_name}/:id"
       end
-    end
 
-    # The default name of this resource on the API (e.g. "users")
-    #
-    # Returns String
-    def default_resource_name
-      name.split("::").last.underscore.pluralize
-    end
-
-    # The defined path of this resource on the API (e.g. "/users")
-    #
-    # new_path - A String with the new default value for the plural_resource_path
-    # block    - A Proc object for defining dynamic resource_paths
-    #
-    # Returns String
-    # Returns Proc
-    def plural_resource_path(new_path = nil, &block)
-      if new_path || block_given?
-        @plural_resource_path = (new_path || block)
-      else
-        @plural_resource_path || default_resource_path
+      def plural_resource_path
+        @plural_resource_path ||= default_resource_path
       end
-    end
 
-    # The default path of this resource on the API (e.g. "/users")
-    #
-    # Returns String
-    def default_resource_path
-      resource_name
-    end
+      # Template method for fetching _mine_ records from the API.
+      #
+      # record_id - A String or Integer ID for the record we're fetching from the API.
+      # params    - A Hash of parameters to send to the API.
+      #
+      # Returns String
+      def singular_path_for_record(record_id, params)
+        singular_resource_path.gsub(/\:id/, record_id.to_s)
+      end
 
-    # Template method for fetching _mine_ records from the API.
-    #
-    # record_id - A String or Integer ID for the record we're fetching from the API.
-    # params    - A Hash of parameters to send to the API.
-    #
-    # Returns String
-    def singular_path_for_record(record_id, params)
-      if singular_resource_path.respond_to?(:call)
-        path = singular_resource_path.call
-        path.match(PARAM_REGEX) do |segment|
-          value = params.delete(segment.to_s[1..-1])
-          path  = path.gsub!(/#{segment}/, value.to_s)
-        end
-      else
-        path = singular_resource_path
-      end
-      path = path.gsub(/\:id/, record_id.to_s)
-      if params_include_parent_resource_id?(params)
-        path = nest_path_within_parent(path, params)
-      end
-      path
-    end
   end
 end
