@@ -37,6 +37,7 @@ To configure the gem, create an initializer and define the following block:
 ``` ruby
 # config/initializers/evvnt.rb
 Evvnt.configure do |config|
+  config.environment = Rails.env.production? ? :live : :sandbox
   # Print out useful logger info to the Rails log
   config.logger     = Rails.logger
   config.debug      = Rails.env.development?
