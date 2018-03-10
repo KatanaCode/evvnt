@@ -1,4 +1,4 @@
 module Evvnt
-  class AudienceReach < Evvnt::Base
+  class AudienceReach < Evvnt::NestedObject
   end
 end

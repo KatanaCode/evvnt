@@ -1,4 +1,4 @@
 module Evvnt
-  class Contact < Evvnt::Base
+  class Contact < Evvnt::NestedObject
   end
 end

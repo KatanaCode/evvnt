@@ -1,4 +1,4 @@
 module Evvnt
-  class BroadcastResult < Evvnt::Base
+  class BroadcastResult < Evvnt::NestedObject
   end
 end

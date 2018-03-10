@@ -1,4 +1,4 @@
 module Evvnt
-  class ClicksByDay < Evvnt::Base
+  class ClicksByDay < Evvnt::NestedObject
   end
 end

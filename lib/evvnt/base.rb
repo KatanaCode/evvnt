@@ -22,6 +22,5 @@ module Evvnt
     extend PathHelpers
     extend NestedResources
     extend Actions
-
   end
 end

@@ -1,5 +1,5 @@
 module Evvnt
-  class Link < Evvnt::Base
+  class Link < Evvnt::NestedObject
 
   end
 end

@@ -1,4 +1,4 @@
 module Evvnt
-  class SearchIndexing < Evvnt::Base
+  class SearchIndexing < Evvnt::NestedObject
   end
 end
