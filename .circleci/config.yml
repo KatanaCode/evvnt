@@ -2,6 +2,15 @@
 #
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
+machine:
+  environment:
+    CC_TEST_REPORTER_ID: 63d9f072931b3c61d2ed935cc1d2244c7f9766d64a081e6aef1b974356effab7
+
+dependencies:
+  post:
+    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    - chmod +x ./cc-test-reporter
+
 version: 2
 jobs:
   build:
@@ -42,6 +51,10 @@ jobs:
 
       # run tests!
       - run:
+          pre:
+              - ./cc-test-reporter before-build
+          post:
+              - ./cc-test-reporter after-build --exit-code $EXIT_CODE
           name: Run Rspec
           command: |
             mkdir /tmp/test-results
