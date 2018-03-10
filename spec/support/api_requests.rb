@@ -1,8 +1,5 @@
 RSpec.configure do |config|
   config.before(:all, type: :api) do
-
-    config.include RSpec::JsonMatchers::Matchers
-
     config.include StubApiRequestHelper
 
     Evvnt.configure do |config|

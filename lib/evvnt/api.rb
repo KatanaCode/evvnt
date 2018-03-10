@@ -2,6 +2,7 @@ module Evvnt
   # Internal: Handles requests to the EVVNT api and catches their responses.
   module Api
     # frozen_string_literal: true
+    require 'json/ext'
     require "evvnt/api_error"
 
     extend ActiveSupport::Concern
