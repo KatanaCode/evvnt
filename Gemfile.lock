@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    evvnt (0.1.0)
+    evvnt (0.2.0)
       activesupport (>= 3.0)
       httparty (>= 0.16.0)
       oj
@@ -30,7 +30,7 @@ GEM
       concurrent-ruby (~> 1.0)
     minitest (5.11.3)
     multi_xml (0.6.0)
-    oj (3.4.0)
+    oj (3.5.0)
     parallel (1.12.1)
     parser (2.5.0.3)
       ast (~> 2.4.0)
