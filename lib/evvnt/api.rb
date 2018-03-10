@@ -41,7 +41,12 @@ module Evvnt
           log_request(verb, path, params)
           response = public_send(verb, path, query: params, headers: headers)
           log_response(response)
-          parse_response(response, options)
+          case response.code
+          when 200, 201
+            parse_response(response, options)
+          else
+            raise ApiError, parse_error_response(response.body)
+          end
         end
 
         # Log the request being sent to the API
@@ -70,6 +75,10 @@ module Evvnt
           TEXT
         end
 
+        def parse_body(body)
+          Oj.load(body)
+        end
+
         ##
         # Parse a response from the API and create objects from local classes.
         #
@@ -79,9 +88,13 @@ module Evvnt
         # Returns Array
         # Returns Evvnt::Base subclass
         def parse_response(response, **options)
-          json = Oj.load(response.body)
+          json = parse_body(response.body)
           json = json[options[:object]] if options.key?(:object)
           json.is_a?(Array) ? json.map { |a| new(a) } : new(json)
+        end
+
+        def parse_error_response(body)
+          parse_body(body)["errors"].join(", ")
         end
 
         # Ensure the path is the correct format with a leading slash and ".json" extension
