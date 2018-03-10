@@ -1,3 +1,5 @@
+require 'json/ext'
+
 require "active_support/core_ext/object/inclusion"
 require "active_support/configurable"
 require "active_support/concern"
@@ -24,7 +26,10 @@ module Evvnt
     @configuration ||= configure
   end
 
+  # Require the two main Base classes
   require "evvnt/base"
+  require "evvnt/nested_object"
+
   require "evvnt/audience_reach"
   require "evvnt/broadcast"
   require "evvnt/broadcast_result"

@@ -1,14 +1,24 @@
 module Evvnt
   # Internal: Handles requests to the EVVNT api and catches their responses.
   module Api
+    # frozen_string_literal: true
+    require 'json/ext'
     require "evvnt/api_error"
 
-    # frozen_string_literal: true
     extend ActiveSupport::Concern
 
     ##
     # Allowed HTTP verbs
     HTTP_VERBS = %i[get post put].freeze
+
+    included do
+      if Evvnt.configuration.environment == :live
+        base_uri "https://api.evvnt.com"
+      else
+        base_uri "https://api.sandbox.evvnt.com"
+      end
+    end
+
 
     # Class methods to define on {Evvnt::Base}
     module ClassMethods

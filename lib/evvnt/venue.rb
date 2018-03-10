@@ -1,4 +1,4 @@
 module Evvnt
-  class Venue < Evvnt::Base
+  class Venue < Evvnt::NestedObject
   end
 end

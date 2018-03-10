@@ -2,6 +2,23 @@ module Evvnt
   # Internal: Methods for defining API actions for each resource Class.
   #
   module Actions
+
+    ##
+    # The first record from the API index actions
+    #
+    # Returns {Evvnt::Base} subclass
+    def first
+      defined_actions.include?(:index) ? all.first : method_missing(:first)
+    end
+
+    ##
+    # The last record from the API index actions
+    #
+    # Returns {Evvnt::Base} subclass
+    def last
+      defined_actions.include?(:index) ? all.first : method_missing(:last)
+    end
+
     private
 
       ##
@@ -57,5 +74,6 @@ module Evvnt
         body = block_given? ? block : InstanceTemplateMethods.instance_method(action)
         define_method(action, body)
       end
+
   end
 end

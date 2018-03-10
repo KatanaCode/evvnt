@@ -9,7 +9,8 @@ Gem::Specification.new do |spec|
   spec.email         = ["bodacious@katanacode.com"]
 
   spec.summary       = "A wrapper for the EVVNT API"
-  spec.description   = "Provides a wrapper and helper classes for the EVVNT rest API"
+  spec.description   = "Unnoficial evvnt API gem provides a wrapper and helper classes "\
+                         "for the EVVNT rest API"
   spec.homepage      = "https://github.com/katanacode/evvnt"
   spec.license       = "MIT"
 
@@ -20,13 +21,12 @@ Gem::Specification.new do |spec|
   spec.add_dependency "activesupport", ">= 3.0"
   spec.add_dependency "httparty", ">= 0.16.0"
   spec.add_development_dependency "bundler", "~> 1.16"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec"
-  spec.add_development_dependency "rspec_junit_formatter"
-  spec.add_development_dependency "rubocop"
-  spec.add_development_dependency "webmock"
-  spec.add_development_dependency "dotenv"
-  spec.add_development_dependency "byebug"
-  spec.add_development_dependency "rspec-json_matchers"
-  spec.add_development_dependency "rspec-collection_matchers"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec", ">= 3.7.0", "< 4.0"
+  spec.add_development_dependency "rubocop", ">= 0.53.0"
+  spec.add_development_dependency "webmock", ">= 3.3.0"
+  spec.add_development_dependency "dotenv", ">= 2.2.1"
+  spec.add_development_dependency "byebug", ">= 10.0.0"
+  spec.add_development_dependency "rspec_junit_formatter", ">= 0.3.0"
+  spec.add_development_dependency "rspec-collection_matchers", ">= 1.1.3"
 end

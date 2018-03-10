@@ -1,5 +1,5 @@
 module Evvnt
-  class Price < Evvnt::Base
+  class Price < Evvnt::NestedObject
 
   end
 end
