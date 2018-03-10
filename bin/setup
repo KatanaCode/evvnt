@@ -1,8 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
-set -vx
+# set -vx
 
+# Install local gem dependencies
 bundle install
 
 # Do any other automated setup that you need to do here
+
+# Create .env file if it doesn't already exist...
+if [ ! -f ./.env ]; then
+  printf "Creating local .env file..."
+  touch .env
+  echo "API_KEY=username" >> .env
+  echo "API_SECRET=secret" >> .env
+fi
+printf "
+# ========
+# = NOTE =
+# ========
+
+Add your own API key and secret to .env if you haven't already done so.
+"
