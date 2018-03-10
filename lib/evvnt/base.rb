@@ -23,35 +23,5 @@ module Evvnt
     extend NestedResources
     extend Actions
 
-
-    if Evvnt.configuration.environment == :live
-      base_uri "https://api.evvnt.com"
-    else
-      base_uri "https://api.sandbox.evvnt.com"
-    end
-
-
-    # =================
-    # = Class Methods =
-    # =================
-
-    ##
-    # The first record from the API index actions
-    #
-    # Returns {Evvnt::Base} subclass
-    def self.first
-      defined_actions.include?(:index) ? all.first : method_missing(:first)
-    end
-
-    ##
-    # The last record from the API index actions
-    #
-    # Returns {Evvnt::Base} subclass
-    def self.last
-      defined_actions.include?(:index) ? all.first : method_missing(:last)
-    end
-
-
-
   end
 end

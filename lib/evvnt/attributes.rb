@@ -1,5 +1,6 @@
 module Evvnt
   module Attributes
+    # frozen_string_literal: true
 
     extend ActiveSupport::Concern
 
@@ -97,7 +98,7 @@ module Evvnt
     # block       - Proc of code passed with original message.
     #
     def method_missing(method_name, *args)
-      if method_name.to_s[/\=/]
+      if method_name.to_s
         attributes[method_name.to_s.gsub(/\=+/, "")] = args.first
       else
         attributes[method_name.to_s.gsub(/\=+/, "")]
