@@ -40,11 +40,8 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
-      - run:
-          name: Bunder Audit
-          command: gem install bundle-audit && bundle-audit check --update
-
+  test:
+    steps:
       - run: ./cc-test-reporter before-build
 
       # run tests!
@@ -62,13 +59,30 @@ jobs:
 
       - run: ./cc-test-reporter after-build --exit-code $EXIT_CODE
 
+  validate:
+    steps:
+      - run:
+          name: Bunder Audit
+          command: gem install bundle-audit && bundle-audit check --update
+
+
       - run:
           name: Code Style Check
           command: rubocop lib --display-style-guide -c ./.rubocop.yml
 
+  cleanup:
+    steps:
       # collect reports
       - store_test_results:
           path: /tmp/test-results
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+workflows:
+  version: 2
+  build_test_and_validate:
+    jobs:
+      - build
+      - test
+      - validate
+      - cleanup
