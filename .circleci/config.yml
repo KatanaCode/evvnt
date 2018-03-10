@@ -106,5 +106,6 @@ jobs:
 workflows:
   version: 2
   build_and_audit:
-    - build
-    - audit
+    jobs:
+      - build
+      - audit
