@@ -1,4 +1,5 @@
 module Evvnt
+  # Adds attributes hash plus getters and setters to inherited base class.
   module Attributes
     # frozen_string_literal: true
 
