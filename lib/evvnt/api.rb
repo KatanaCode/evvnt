@@ -2,7 +2,7 @@ module Evvnt
   # Internal: Handles requests to the EVVNT api and catches their responses.
   module Api
     # frozen_string_literal: true
-    require 'json/ext'
+    require 'oj'
     require "evvnt/api_error"
 
     extend ActiveSupport::Concern
@@ -79,7 +79,7 @@ module Evvnt
         # Returns Array
         # Returns Evvnt::Base subclass
         def parse_response(response, **options)
-          json = JSON.parse(response.body)
+          json = Oj.load(response.body)
           json = json[options[:object]] if options.key?(:object)
           json.is_a?(Array) ? json.map { |a| new(a) } : new(json)
         end

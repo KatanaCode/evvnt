@@ -1,5 +1,3 @@
-require 'json/ext'
-
 require "active_support/core_ext/object/inclusion"
 require "active_support/configurable"
 require "active_support/concern"
