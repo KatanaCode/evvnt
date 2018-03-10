@@ -9,7 +9,8 @@ Gem::Specification.new do |spec|
   spec.email         = ["bodacious@katanacode.com"]
 
   spec.summary       = "A wrapper for the EVVNT API"
-  spec.description   = "Provides a wrapper and helper classes for the EVVNT rest API"
+  spec.description   = "Unnoficial evvnt API gem provides a wrapper and helper classes "\
+                         "for the EVVNT rest API"
   spec.homepage      = "https://github.com/katanacode/evvnt"
   spec.license       = "MIT"
 
