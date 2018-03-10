@@ -49,10 +49,6 @@ jobs:
 
       # run tests!
       - run:
-          pre:
-              - ./cc-test-reporter before-build
-          post:
-              - ./cc-test-reporter after-build --exit-code $EXIT_CODE
           name: Run Rspec
           command: |
             mkdir /tmp/test-results
@@ -64,7 +60,7 @@ jobs:
                             --format progress \
                             $TEST_FILES
 
-      - run: ./cc-test-reporter after-build -t clover --exit-code $?
+      - run: ./cc-test-reporter after-build --exit-code $EXIT_CODE
 
       - run:
           name: Code Style Check
