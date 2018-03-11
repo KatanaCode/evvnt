@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    evvnt (0.2.3)
+    evvnt (0.2.4)
       activesupport (>= 3.0)
       httparty (>= 0.16.0)
       oj
