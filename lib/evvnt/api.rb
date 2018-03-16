@@ -94,7 +94,12 @@ module Evvnt
         end
 
         def parse_error_response(body)
-          parse_body(body)["errors"].join(", ")
+          body_json = parse_body(body)
+          if body_json.key?("error")
+            body_json["error"]
+          else
+            body_json["errors"].join(", ")
+          end
         end
 
         # Ensure the path is the correct format with a leading slash and ".json" extension
