@@ -42,8 +42,12 @@ describe Evvnt::Package, type: :api do
                                     event_quantity_remaining: 1) }
 
     before do
-      stub_api_request(:post, "users/ffcdd57c-243e-4d71-ab50-a0ca765bbe54/packages",
-                       params: {id: 131, event_quantity: 2, event_quantity_remaining: 1})
+      stub_api_request(:post, "packages",
+                       params: { id: 131,
+                                 user_id: "ffcdd57c-243e-4d71-ab50-a0ca765bbe54",
+                                 event_quantity: 2,
+                                 event_quantity_remaining: 1
+                               })
     end
 
     it "returns a Package object" do

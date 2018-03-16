@@ -8,7 +8,9 @@ module Evvnt
 
     ##
     # POST /packages Create a package
-    define_action :create
+    define_action :create do |params|
+      api_request(:post, "packages", params: params)
+    end
 
     ##
     # GET /packages/:package_id Get the details of a package
